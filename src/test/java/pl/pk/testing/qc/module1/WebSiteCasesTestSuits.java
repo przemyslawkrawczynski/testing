@@ -27,15 +27,12 @@ public class WebSiteCasesTestSuits {
 
     @Test
     public void should_open_web_site_and_check_is_button_login_exists() {
-        //Given
+        //When
         driver.navigate().to("https://project-ta-acme-01.netlify.com/");
 
-        //When
-        WebElement loginPlace = driver.findElement(By.id("login"));
-        WebElement passwordPlace = driver.findElement(By.id("password"));
+        //Then
         WebElement loginButton = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/button"));
 
-        //Then
         assertThat(loginButton).isNotNull().isInstanceOf(WebElement.class);
 
     }
@@ -76,7 +73,7 @@ public class WebSiteCasesTestSuits {
 
         assertThat(confirmaitonLoginMsg).isEqualTo("Zalogowano pomyślnie!");
         assertThat(logoutButton).isEqualTo("Wyloguj");
-        assertThat(url).isEqualTo(currentUrlAfterLogin);
+        assertThat(currentUrlAfterLogin).isEqualTo(url);
     }
 
     @Test
@@ -111,7 +108,7 @@ public class WebSiteCasesTestSuits {
         String passwordPlaceValue = passwordPlace.getText();
 
         assertThat(passwordPlaceValue).isNullOrEmpty();
-        assertThat(expectedMessage).isEqualTo(afterWrongLoginMsg);
+        assertThat(afterWrongLoginMsg).isEqualTo(expectedMessage);
     }
 
     @Test
@@ -122,10 +119,10 @@ public class WebSiteCasesTestSuits {
         inCorrectLogin(driver);
 
         //When
-        String afterWrongLoginMsg = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[0]")).getText();
+        String afterWrongLoginMsg = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[1]")).getText();
 
         //Then
-        assertThat(expectedMessage).isEqualTo(afterWrongLoginMsg);
+        assertThat(afterWrongLoginMsg).isEqualTo(expectedMessage);
     }
 
     @Test
@@ -139,7 +136,7 @@ public class WebSiteCasesTestSuits {
         String messageAfterFillOnlyOneField = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[1]")).getText();
 
         //Then
-        assertThat(expectedMessage).isEqualTo(messageAfterFillOnlyOneField);
+        assertThat(messageAfterFillOnlyOneField).isEqualTo(expectedMessage);
     }
 
     @Test
@@ -153,13 +150,13 @@ public class WebSiteCasesTestSuits {
         String messageAfterFillOnlyOneField = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[1]")).getText();
 
         //Then
-        assertThat(expectedMessage).isEqualTo(messageAfterFillOnlyOneField);
+        assertThat(messageAfterFillOnlyOneField).isEqualTo(expectedMessage);
     }
 
     @Test
     public void should_user_after_incorrect_login_cant_relogin_although_correct_authorisation() {
         //Given
-        String expectedMessage = "Wypełnij wszystkie pola";
+        String expectedMessage = "Odczekaj 30 sekund przed ponownym logowaniem";
         driver.navigate().to("https://project-ta-acme-01.netlify.com/");
 
 
@@ -175,9 +172,9 @@ public class WebSiteCasesTestSuits {
         //Then
         WebElement loginPlace = driver.findElement(By.id(Field.LOGIN));
         WebElement passwordPlace = driver.findElement(By.id(Field.PASS));
-        String messageAfterFillOnlyOneField = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[3]")).getText();
+        String alertMessage = driver.findElement(By.xpath("/html/body/div/section/div/div/div/div/div/form/div[3]/p[3]")).getText();
 
-        assertThat(expectedMessage).isEqualTo(messageAfterFillOnlyOneField);
+        assertThat(alertMessage).isEqualTo(expectedMessage);
         assertThat(loginPlace).isNotNull().isInstanceOf(WebElement.class);
         assertThat(passwordPlace).isNotNull().isInstanceOf(WebElement.class);
     }

@@ -18,4 +18,10 @@ public class Module2MainClass {
         return variables;
     }
 
+    public static void twoNineExercise() {
+        Notebook notebook = new Notebook(600, 1000, 2018);
+        Notebook goodNotebook = new Notebook(2000, 1500, 2019);
+        System.out.println(notebook.prepareOpinion());
+        System.out.println(goodNotebook.checkPrice());
+    }
 }

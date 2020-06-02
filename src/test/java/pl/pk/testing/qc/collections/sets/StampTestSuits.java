@@ -22,7 +22,9 @@ public class StampTestSuits {
 
         //When
         stampSet.add(stamp1);
+        stampSet.add(stamp1);
         stampSet.add(stamp2);
+
 
         //Then
         int expectedSize = 1;

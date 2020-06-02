@@ -26,6 +26,7 @@ public class CarsListApplication {
         Car car = carList.get(10);
         carList.remove(car);
 
+        carList.forEach(c -> carUtils.showCarInfo(c));
         System.out.println("Car list size after remove: " + carList.size());
     }
 
